@@ -20,6 +20,7 @@ public class AllWordsCounter {
         for (int i = 0; i<counters.length; i++){
             if (counters[i]==null){
                 lastWord = i-1;
+                break;
             }
         }
         int items = lastWord+1;
@@ -42,6 +43,7 @@ public class AllWordsCounter {
             if (sinWord.wordMatches(word)== true){
                 sinWord.incrementCount();
                 found = true;
+                break;
             }
             // If you find the word increment the count and return
         }
@@ -61,9 +63,22 @@ public class AllWordsCounter {
 	 * @return
 	 */
 	public int getCount(String word) {
+        int n = getNumWords();
+        int occurence = 0;
+        for (int i = 0; i < n; i++)
+        {
+            SingleWordCounter sinWord = counters[i];
+            if (sinWord.wordMatches(word)== true)
+            {
+                int appears = sinWord.getCount();
+                occurence = appears;
+                break;
+            }
+            // If you find the word increment the count and return
+        }
         // TODO: pattern this after the count() function.
         // Make sure to return 0 for words you haven't seen before.
-        return -1;
+        return occurence;
 	}
 	
 	/**
@@ -73,10 +88,13 @@ public class AllWordsCounter {
 	public String []  getAllWords() {
         // part one: create an array of strings of size equal to the number of words
         int n = getNumWords();
-        String words[] = null;  // FIXME
+        String words[] = new String[n];  // FIXME
 
         // part two: fill the array of strings using a loop
-
+        for (int i=0; i<n; i++){
+            String palabra = counters[i].getWord();
+            words[i] = palabra;
+        }
         return words;
 	}
 }
