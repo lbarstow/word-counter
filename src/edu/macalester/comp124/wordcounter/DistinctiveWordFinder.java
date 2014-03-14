@@ -50,6 +50,7 @@ public class DistinctiveWordFinder {
 	 * @throws java.io.IOException
 	 */
 	private void countWordsInOneFile(File file1, AllWordsCounter counter) throws IOException {
+        System.out.println("onfile called");
 		BufferedReader r = new BufferedReader(new FileReader(file1));
 		while (true) {
 			String line = r.readLine();
@@ -60,6 +61,7 @@ public class DistinctiveWordFinder {
                 counter.count(w);
             }
 		}
+        r.close();
 	}
 	
 	/**
